@@ -7,28 +7,56 @@ function forms () {
     // ---------------------------------------------------
     
     // --------------- Local Variables -------------------
-    var object_type = sh.getRange(row,2).getValue();
-    var subject = sh.getRange(row,3).getValue();
-    var content = sh.getRange(row,4).getValue();
-    var send_type = sh.getRange(row,5).getValue();
-    var deadline = sh.getRange(row,6).getValue();
-    var group = sh.getRange(row,7).getValue();
-    var members = sh.getRange(row,8).getValue();
-    // ---------------------------------------------------
+    var data = sh.getRange(row,2).getValue();
+    var valor = sh.getRange(row,3).getValue();
+    var combustivel = sh.getRange(row,4).getValue();
+    var posto = sh.getRange(row,5).getValue();
+    var cidade = sh.getRange(row,6).getValue();
+    var placa = sh.getRange(row,7).getValue();
+    var km = sh.getRange(row,8).getValue();
+    var prestador = sh.getRange(row,9).getValue();
 
-    // -------------- Conditional functions --------------
-    if (group=="Sim"){
-        var text = "novo(a) " + object_type + "\nMatéria: " + subject + "\nAssunto: " + content + "\nEntregar em: " + send_type + "\t," + deadline + "\nIntegrantes: " + members;
+    console.log(placa);
 
-        text = encodeURIComponent(text);
-        message(text);
+    if (placa == "DZP1G51"){
+      placa = "K01 - DZP1G51";
+    } 
+    else{
+      if (placa == "FJY8169"){
+        placa = "L320 - FJY8169";
+      } 
+      else {
+        if (placa == "FYI3A22"){
+          placa = "L555 - FYI3A22";
+        } 
+        else {
+          if (placa == "GHU"){
+            placa = "L382 - GHU";
+          }
+          else {
+            if (placa == "FPZ4G26"){
+              placa = "TF28 - FPZ4G26";
+            } 
+            else {
+              if (placa == "GIK7H86"){
+                placa = "TF460 - GIK7H86";
+              }
+              else {
+              }
+            }
+          }
+        }
+      }
     }
-    else if (group=="Não"){
-        var text = "novo(a) " + object_type + "\nMatéria: " + subject + "\nAssunto: " + content + "\nEntregar em: " + send_type + "\t," + deadline;
-
-        text = encodeURIComponent(text);
-        message(text);
-    }
+    
+    
+    
+    
+    
+    console.log(placa);
+    var text = "Nota Fiscal de Abastecimento - " + data + " - " + cidade + "\nPosto: " + posto + "\nPrestador: " + prestador + "\nVeículo: " + placa + "\nKilometragem: " + km +"\nCombustível: " + combustivel + "\nPreço: " + valor;
+    text = encodeURIComponent(text);
+    message(text);
     // ---------------------------------------------------
 
 }
@@ -36,10 +64,9 @@ function forms () {
 function message (text) {
     
     var chat_id = 123456789
-    var bot_id = "your bot id";
+    var bot_id = "your-bot-id";
     var url = "https://api.telegram.org/bot" + bot_id + "/sendMessage?chat_id=-" + chat_id + "&text=" + text;
     // Bot joga a url no navegador e entra na mesma
-    console.log(url)
     Logger.log(url);
     UrlFetchApp.fetch(url);
 
